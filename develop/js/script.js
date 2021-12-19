@@ -84,7 +84,7 @@ var displayWeather = function(city , fromInput ){
                         .then(function(response) {
                             response.json().then(function(data) {
                                 
-                                $("#uvi").text(data.current.uvi);
+                                $("#uvi").text( data.current.uvi);
                                 
                                 
                                 if(data.current.uvi<10){
