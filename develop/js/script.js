@@ -84,10 +84,21 @@ var displayWeather = function(city , fromInput ){
                         .then(function(response) {
                             response.json().then(function(data) {
                                 
-                                $("#uv").text("UV Index : " + data.current.uvi);
+                                $("#uvi").text(data.current.uvi);
+                                
+                                
+                                if(data.current.uvi<10){
+                                    $("#uvi").removeClass();
+                                    $("#uvi").toggleClass("bg-success text-white");
 
-                                console.log(data.current.uvi)
-                                console.log(data.current.weather[0].icon);
+                                }else if(data.current.uvi<25){
+                                    $("#uvi").removeClass();
+                                    $("#uvi").toggleClass("bg-warning text-dark");
+                                }else{
+                                    $("#uvi").removeClass();
+                                    $("#uvi").toggleClass("bg-danger text-white");
+                                }
+                                
                                 var urlIcon = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png";
                                 console.log(urlIcon);
                                 $("#iconImg").attr("src", urlIcon);
@@ -96,7 +107,7 @@ var displayWeather = function(city , fromInput ){
                         });
                     //code to display fore Cast information 
                     for(let i =1; i<6 ; i++){
-                        console.log( "valor de i " + i)
+                        
                         var dateForecast = moment().add(i, 'days').format('L');
                         var foreCastId = "#foreCast"+i;
                         $(foreCastId).text(dateForecast);
