@@ -26,22 +26,23 @@ var loadHistory = function(){
     $("#cityHistory5").text(info);
     info = localStorage.getItem("cityHistory6");
     $("#cityHistory6").text(info);
-    init();
+   // init();
 
 };
 
 var displayWeather = function(city , fromInput ){
     console.log("in secrch");
-       console.log(fromInput);
+    console.log(fromInput);
+
     
-        
-       
-        //https://api.openweathermap.org/data/2.5/weather?q=san%20antonio&APPID=22964cc66fc396ccbca6cca46b9ca9f7
-        var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",US&units=imperial&APPID=22964cc66fc396ccbca6cca46b9ca9f7";
-        var lat;
-        var lon;
-        var getInfo = fetch(apiUrl)
+    
+    //https://api.openweathermap.org/data/2.5/weather?q=san%20antonio&APPID=22964cc66fc396ccbca6cca46b9ca9f7
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + ",US&units=imperial&APPID=22964cc66fc396ccbca6cca46b9ca9f7";
+    var lat;
+    var lon;
+    fetch(apiUrl)
         .then(function(response) {
+            if (response.ok) {
                 response.json().then(function(data) {
                     lat = data.coord.lat;
                     
@@ -76,13 +77,13 @@ var displayWeather = function(city , fromInput ){
                         $("#cityHistory1").text(city);
                         localStorage.setItem("cityHistory1", city);
                     };    
-                   
+                    
 
                     //code to get UVI index
                     var response = fetch(apiUrl)
                         .then(function(response) {
                             response.json().then(function(data) {
-                               
+                                
                                 $("#uv").text("UV Index : " + data.current.uvi);
 
                                 console.log(data.current.uvi)
@@ -122,7 +123,13 @@ var displayWeather = function(city , fromInput ){
                     };
                     
                 });
-            });
+            }else {
+                // if not successful, redirect to homepage
+                document.location.replace("./index.html");
+              }
+
+
+        });
     
         
    
@@ -130,8 +137,8 @@ var displayWeather = function(city , fromInput ){
 
 
 };
-
-var init = function(){
+//fuction to 
+//var init = function(){
     $("#search").on("click", function(){
         
         var text = $("#zipcode").val();
@@ -146,12 +153,14 @@ var init = function(){
     });
    
 
-};
-
-// search();
+//};
 
 loadHistory();
 
+
+
+
+//display the weather of City1
 $("#cityHistory1").on("click" , function(){
     var text = $("#cityHistory1").text();
     
@@ -164,7 +173,7 @@ $("#cityHistory1").on("click" , function(){
     
 } );
 
-
+//display the weather of City2
 $("#cityHistory2").on("click" , function(){
     var text = $("#cityHistory2").text();
  
@@ -177,7 +186,7 @@ $("#cityHistory2").on("click" , function(){
     
 } );
 
-
+//display the weather of City3
 $("#cityHistory3").on("click" , function(){
     var text = $("#cityHistory3").text();
     
@@ -190,7 +199,7 @@ $("#cityHistory3").on("click" , function(){
     
 } );
 
-
+//display the weather of City4
 $("#cityHistory4").on("click" , function(){
     var text = $("#cityHistory4").text();
     
@@ -203,7 +212,7 @@ $("#cityHistory4").on("click" , function(){
     
 } );
 
-
+//display the weather of City5
 $("#cityHistory5").on("click" , function(){
     var text = $("#cityHistory5").text();
     
@@ -216,7 +225,7 @@ $("#cityHistory5").on("click" , function(){
     
 } );
 
-
+//display the weather of City6
 $("#cityHistory6").on("click" , function(){
     var text = $("#cityHistory6").text();
     
@@ -228,7 +237,6 @@ $("#cityHistory6").on("click" , function(){
     };
     
 } );
-
 
 
 
