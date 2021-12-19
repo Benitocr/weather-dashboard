@@ -1,7 +1,7 @@
 var search = function(){
     console.log("in secrch");
 
-    $("#search").on("click", function(){
+    
         alert("click");
         var text = $("#zipcode").val();
         //https://api.openweathermap.org/data/2.5/weather?q=san%20antonio&APPID=22964cc66fc396ccbca6cca46b9ca9f7
@@ -40,6 +40,7 @@ var search = function(){
                         });
                     //fuction to display fore Cast information 
                     for(let i =1; i<6 ; i++){
+                        console.log( "valor de i " + i)
                         var dateForecast = moment().add(i, 'days').format('L');
                         var foreCastId = "#foreCast"+i;
                         $(foreCastId).text(dateForecast);
@@ -53,6 +54,7 @@ var search = function(){
                                     var urlIconForeCast = "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png";
                                     var imageForeCastId = "#imgForeCast"+i;
                                     $(imageForeCastId).attr("src", urlIconForeCast);
+                                    console.log("liga para icono forecast" +i+"  "+ urlIconForeCast);
                                     var tempForeCastId = "#tempForeCast"+i;
                                     $(tempForeCastId).text("Temp : " + data.daily[i].temp.day +" F");
                                     var windForeCastId = "#windForeCast"+i;
@@ -68,14 +70,17 @@ var search = function(){
             });
     
         
-        
-    });
+   
+    
 
 
 };
 
 
-search();
+// search();
 
+$("#search").on("click", search);
+//  function(){
 
+// });
 

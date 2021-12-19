@@ -7,7 +7,16 @@ header{
     
 };
 
-.#search{
+.btnHistory {
+    margin-top: 10px;
+    
+}
+
+.text-muted {
+    color: white;
+}
+
+#search {
     margin-top: 5px;
 }
 
